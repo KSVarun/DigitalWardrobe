@@ -1,10 +1,8 @@
 package com.hci.digitalwardrobe;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPanelClosed(int featureId, @NonNull Menu menu) {
-        super.onPanelClosed(featureId, menu);
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
+
 }
