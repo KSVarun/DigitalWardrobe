@@ -28,6 +28,7 @@ public class TestActivity extends AppCompatActivity {
 
         String cName = cityName.getText().toString();
 
+
         String content;
         weather = new Weather();
         try {
