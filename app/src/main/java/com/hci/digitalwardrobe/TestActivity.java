@@ -21,6 +21,7 @@ public class TestActivity extends AppCompatActivity {
     Button searchButton;
     TextView result;
 
+
     public void search(View view){
         cityName = findViewById(R.id.cityName);
         searchButton = findViewById(R.id.search);
