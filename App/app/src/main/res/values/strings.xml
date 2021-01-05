@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">DigitalWardrobe</string>
+
+    <string-array name="names">
+        <item>Sports (Outdoor)</item>
+        <item>University</item>
+        <item>Business</item>
+    </string-array>
+
 </resources>
