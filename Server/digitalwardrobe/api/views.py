@@ -6,13 +6,10 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from digitalwardrobe.api.serializers import UserSerializer, GroupSerializer
 from django.http import JsonResponse
-from digitalwardrobe.image_background_remove_tool import main
 
 
 def testAPISet(request):
-    print(main.clo())
-    var = main.clo()
-    return JsonResponse({'mystring': var})
+    return JsonResponse({'mystring': "Test API"})
 
 
 class UserViewSet(viewsets.ModelViewSet):
