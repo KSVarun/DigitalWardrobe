@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".RegistrationActivity"
+    android:background="@color/splash_screen_background"
+    android:padding="30dp"
+    android:transitionName="transition">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/muli_black"
+            android:text="Create Account"
+            android:textAllCaps="true"
+            android:textColor="@color/logo_white"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                android:textColorHint="@color/logo_white"
+                app:boxStrokeColor="@color/logo_white"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/logo_white"
+                app:hintTextColor="@color/logo_white"
+                app:startIconDrawable="@drawable/write"
+                app:startIconTint="@color/logo_white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/logo_white"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:textColorHint="@color/logo_white"
+                app:boxStrokeColor="@color/logo_white"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/logo_white"
+                app:hintTextColor="@color/logo_white"
+                app:startIconDrawable="@drawable/email"
+                app:startIconTint="@color/logo_white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/logo_white"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                app:boxStrokeColor="@color/logo_white"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/logo_white"
+                app:hintTextColor="@color/logo_white"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/logo_white"
+                app:startIconDrawable="@drawable/password"
+                app:startIconTint="@color/logo_white"
+                android:textColorHint="@color/logo_white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli"
+                    android:inputType="textPassword"
+                    android:textColor="@color/logo_white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                app:boxStrokeColor="@color/logo_white"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/logo_white"
+                app:hintTextColor="@color/logo_white"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/logo_white"
+                app:startIconDrawable="@drawable/password"
+                app:startIconTint="@color/logo_white"
+                android:textColorHint="@color/logo_white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli"
+                    android:inputType="textPassword"
+                    android:textColor="@color/logo_white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="18dp"
+                android:text="Choose Gender"
+                android:textSize="18sp"
+                android:fontFamily="@font/muli"
+                android:textColor="@color/logo_white"/>
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="12dp"
+                >
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:buttonTint="@color/logo_white"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/logo_white"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female"
+                    android:buttonTint="@color/logo_white"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/logo_white"/>
+
+                <RadioButton
+                    android:id="@+id/radioButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other"
+                    android:buttonTint="@color/logo_white"
+                    android:fontFamily="@font/muli"
+                    android:textColor="@color/logo_white"/>
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/logo_blue"
+            android:elevation="5dp"
+            android:text="Submit"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/logo_white" />
+
+        <Button
+            android:id="@+id/already_member_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/splash_screen_background"
+            android:elevation="5dp"
+            android:text="Already have an account? Login"
+            android:textAllCaps="false"
+            android:onClick="openLogin"
+            android:fontFamily="@font/muli"
+            android:textColor="@color/logo_white"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
