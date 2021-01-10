@@ -1,15 +1,35 @@
+from django.http.multipartparser import MultiPartParser
 from django.shortcuts import render
 
 # Create your views here.
+import os
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.decorators import api_view
+
 from digitalwardrobe.api.serializers import UserSerializer, GroupSerializer
 from django.http import JsonResponse
+from digitalwardrobe.image_background_remove_tool.main import cli
 
 
 def testAPISet(request):
     return JsonResponse({'mystring': "Test API"})
+
+
+@api_view(['POST'])
+def uploadImage(request):
+    temp = request.data.get('file')
+    try:
+        with open(temp.name, "wb") as file:
+            file.write(temp.read())
+            file.close()
+            cli(temp.name)
+
+    finally:
+        os.remove(temp.name)
+
+    return JsonResponse({'Image': 'Background removal successful'})
 
 
 class UserViewSet(viewsets.ModelViewSet):
