@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Digital Wardrobe</string>
+    <string name="app_name">DigitalWardrobe</string>
+
+    <string-array name="names">
+        <item>Sports (Outdoor)</item>
+        <item>University</item>
+        <item>Business</item>
+    </string-array>
+
+>>>>>>> main
 </resources>

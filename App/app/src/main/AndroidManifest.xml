@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalWardrobe">
+
+        <activity android:name=".TravelRecommendation"></activity>
+        <activity android:name=".RecommendActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity
             android:name=".SplashActivity"
@@ -22,7 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".TestActivity" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.DigitalWardrobe" />
