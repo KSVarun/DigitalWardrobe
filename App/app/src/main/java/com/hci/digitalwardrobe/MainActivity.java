@@ -3,11 +3,10 @@ package com.hci.digitalwardrobe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 
 import com.hci.digitalwardrobe.calls.UploadClothesAPI;
 import com.hci.digitalwardrobe.models.ClothesModel;
@@ -25,8 +24,8 @@ import java.net.URL;
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
-
 public class MainActivity extends AppCompatActivity {
+
 
     private static final String API_BASE_URL = "localhost:8000";
     private Retrofit retrofit;
@@ -56,10 +55,17 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureWeatherButton() {
         Button nextButton = (Button) findViewById(R.id.ButtonWeather);
+        Button Predictionbutton = (Button) findViewById(R.id.buttonWeatherPred);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+                startActivity(new Intent(MainActivity.this, RecommendActivity.class));
+            }
+        });
+        Predictionbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TravelRecommendation.class));
             }
         });
 
