@@ -5,18 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TravelRecommendation extends AppCompatActivity {
@@ -34,7 +30,7 @@ public class TravelRecommendation extends AppCompatActivity {
     // TODO implement function that gets user gender
     private String gender = "male";
 
-    private final float POP_THRESHHOLD = 0.3f;
+    private final float POP_THRESHOLD = 0.3f;
 
     public enum Condition{
         RAIN,SNOW,CLEAR,CLOUDS
@@ -64,9 +60,6 @@ public class TravelRecommendation extends AppCompatActivity {
 
     // Function to call Weather api and get prediction of the weather of the specific Location for the current and the next 7 days.
     public void search(View view){
-        cityName = findViewById(R.id.cityName2);
-        searchButton = findViewById(R.id.search2);
-        result = findViewById(R.id.result2);
 
         String cName = cityName.getText().toString();
         find_coord(cName);
@@ -140,23 +133,23 @@ public class TravelRecommendation extends AppCompatActivity {
     public String predictCloth(float temp, float pop){
         String clothingitem = "";
         if(temp<0){
-            if(pop<POP_THRESHHOLD) clothingitem = "Winter coat";
+            if(pop< POP_THRESHOLD) clothingitem = "Winter coat";
             else clothingitem = "Winter jacket";
         }
         else if(0<=temp && temp<10){
-            if(pop<POP_THRESHHOLD) clothingitem = "down jacket";
+            if(pop< POP_THRESHOLD) clothingitem = "down jacket";
             else clothingitem = "Rain coat";
         }
         else if(10<=temp && temp<18){
-            if(pop<POP_THRESHHOLD) clothingitem = "Jacket";
+            if(pop< POP_THRESHOLD) clothingitem = "Jacket";
             else clothingitem = "Rain jacket";
         }
         else if(18<=temp && temp<22){
-            if(pop<POP_THRESHHOLD) clothingitem = "Shirt";
+            if(pop< POP_THRESHOLD) clothingitem = "Shirt";
             else clothingitem = "Windbreaker";
         }
         else{
-            if(pop<POP_THRESHHOLD) clothingitem = "T-Shirt";
+            if(pop< POP_THRESHOLD) clothingitem = "T-Shirt";
             else clothingitem = "Windbreaker";
         }
         return clothingitem;
@@ -167,5 +160,9 @@ public class TravelRecommendation extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_recommendation);
+
+        cityName = findViewById(R.id.cityName2);
+        searchButton = findViewById(R.id.search2);
+        result = findViewById(R.id.result2);
     }
 }

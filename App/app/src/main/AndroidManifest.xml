@@ -3,6 +3,9 @@
     package="com.hci.digitalwardrobe">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.Camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -11,8 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalWardrobe">
-
-        <activity android:name=".TravelRecommendation"></activity>
+        <activity android:name=".ScanCodeActivity"></activity>
+        <activity android:name=".BarCodeActivity" />
+        <activity android:name=".TravelRecommendation" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity

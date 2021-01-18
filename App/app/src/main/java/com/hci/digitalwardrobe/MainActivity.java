@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.google.zxing.BarcodeFormat;
 import com.hci.digitalwardrobe.calls.UploadClothesAPI;
 import com.hci.digitalwardrobe.models.ClothesModel;
 
@@ -35,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retrofit = new Retrofit.Builder()
+/*        retrofit = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
+*/
         setContentView(R.layout.activity_main);
 
         configureWeatherButton();
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TravelRecommendation.class));
+            }
+        });
+        Button barcode_btn = (Button) findViewById(R.id.BarCodeScanner);
+        barcode_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, BarCodeActivity.class));
             }
         });
 

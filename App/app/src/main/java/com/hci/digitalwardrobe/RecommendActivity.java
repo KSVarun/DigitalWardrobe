@@ -2,7 +2,6 @@ package com.hci.digitalwardrobe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
 
 public class RecommendActivity extends AppCompatActivity {
 
@@ -31,10 +28,10 @@ public class RecommendActivity extends AppCompatActivity {
 
     // TODO implement function that gets user gender
     String gender = "female";
-    private Activitys activity = Activitys.BUSINESS;
+    private Activities activity = Activities.BUSINESS;
     private TravelRecommendation.Condition condition = TravelRecommendation.Condition.CLEAR;
 
-    public enum Activitys{
+    public enum Activities {
         UNIVERSITY,SPORTS_OUTDOOR,BUSINESS,
     }
     //Function that gets called when searchButton gets clicked. Calculates Weather data and calls other functions to predict one clothing item.
@@ -94,7 +91,7 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     //Function that calculates one clothing item based of activity, temperature and weather condition.
-    public String PredictCloth(Activitys activity, float temperature, TravelRecommendation.Condition condition){
+    public String PredictCloth(Activities activity, float temperature, TravelRecommendation.Condition condition){
         String clothitem = "";
         switch (activity){
             case SPORTS_OUTDOOR:
@@ -169,15 +166,15 @@ public class RecommendActivity extends AppCompatActivity {
         String business = "Business";
         String sport = "Sports (Outdoor)";
         if(act.equals(sport)){
-            activity = Activitys.SPORTS_OUTDOOR;
+            activity = Activities.SPORTS_OUTDOOR;
         }
         else if(act.equals(university)){
-            activity = Activitys.UNIVERSITY;
+            activity = Activities.UNIVERSITY;
         }
         else if(act.equals(business)){
-            activity = Activitys.BUSINESS;
+            activity = Activities.BUSINESS;
         }
-        else activity = Activitys.UNIVERSITY;
+        else activity = Activities.UNIVERSITY;
     }
 
     @Override
