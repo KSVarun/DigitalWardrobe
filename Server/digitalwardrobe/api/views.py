@@ -10,7 +10,8 @@ from rest_framework.decorators import api_view
 
 from digitalwardrobe.api.serializers import UserSerializer, GroupSerializer
 from django.http import JsonResponse
-# from digitalwardrobe.image_background_remove_tool.main import cli
+from digitalwardrobe.image_background_remove_tool.main import cli
+import digitalwardrobe.clothing_attributes_detection.app.main as cad
 
 
 def testAPISet(request):
@@ -18,18 +19,19 @@ def testAPISet(request):
 
 
 @api_view(['POST'])
-def uploadImage(request):
-    # temp = request.data.get('file')
-    # try:
-    #     with open(temp.name, "wb") as file:
-    #         file.write(temp.read())
-    #         file.close()
-    #         cli(temp.name)
-    #
-    # finally:
-    #     os.remove(temp.name)
+def predictAttributes(request):
+    temp = request.data.get('file')
+    try:
+        with open(temp.name, "wb") as file:
+            file.write(temp.read())
+            file.close()
+            cli(temp.name)
+            result = cad.test(temp.name)
 
-    return JsonResponse({'Image': 'Background removal successful'})
+    finally:
+        os.remove(temp.name)
+
+    return JsonResponse(result)
 
 
 class UserViewSet(viewsets.ModelViewSet):

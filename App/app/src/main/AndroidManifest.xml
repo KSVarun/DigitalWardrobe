@@ -3,6 +3,11 @@
     package="com.hci.digitalwardrobe">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -11,18 +16,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalWardrobe">
+        <activity android:name=".AddClothesActivity">
 
-        <activity android:name=".TravelRecommendation"></activity>
-        <activity android:name=".RecommendActivity" />
-        <activity android:name=".WelcomeActivity" />
-        <activity
-            android:name=".SplashActivity"
-            android:theme="@style/SplashTheme">
+        </activity>
+        <activity android:name=".DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".TravelRecommendation" />
+        <activity android:name=".RecommendActivity" />
+        <activity android:name=".WelcomeActivity" />
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".MainActivity" />
         <activity

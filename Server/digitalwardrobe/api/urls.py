@@ -9,5 +9,5 @@ router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path(r'get/', views.testAPISet),
-    path(r'upload/', views.uploadImage),
+    path(r'predict/', views.predictAttributes),
 ]
