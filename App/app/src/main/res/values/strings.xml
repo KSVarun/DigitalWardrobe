@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Digital Wardrobe</string>
+    <string name="API_BASE_URL">http://192.168.0.29:8000/</string>
 
     <string-array name="names">
         <item>Sports (Outdoor)</item>
         <item>University</item>
         <item>Business</item>
     </string-array>
-
-    >>>>>>> main
 </resources>

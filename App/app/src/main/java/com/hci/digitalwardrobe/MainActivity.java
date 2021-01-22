@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.hci.digitalwardrobe.calls.UploadClothesAPI;
 import com.hci.digitalwardrobe.models.ClothesModel;
+import com.hci.digitalwardrobe.models.WardrobeFactory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,27 +25,17 @@ import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.GsonConverterFactory;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 public class MainActivity extends AppCompatActivity {
-
-
-    private static final String API_BASE_URL = "localhost:8000";
-    private Retrofit retrofit;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        retrofit = new Retrofit.Builder()
-                .baseUrl(API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         setContentView(R.layout.activity_main);
-
         configureWeatherButton();
-
         apiTestButton ();
 
     }
@@ -72,15 +64,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void apiTestButton() {
-        Button nextButton = (Button) findViewById(R.id.ButtonAPI);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        Button nextButton = findViewById(R.id.ButtonAPI);
+        nextButton.setOnClickListener(view -> {
+            WardrobeFactory factory = WardrobeFactory.getInstance();
+            UploadClothesAPI api = factory.getRetrofit().create(UploadClothesAPI.class);
+            Call<ClothesModel> call = api.getClothes();
+            call.enqueue(new Callback<ClothesModel>() {
+                @Override
+                public void onResponse(Response<ClothesModel> response) {
+                    ClothesModel resource = response.body();
+                    String text = resource.mystring;
+                    Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
+                }
 
-                UploadClothesAPI api = retrofit.create(UploadClothesAPI.class);
-                Call<ClothesModel> call = api.getClothes();
-            }
+                @Override
+                public void onFailure(Throwable t) {
+
+                }
+            });
+
         });
 
     }
 }
+

@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Email"
+                android:hint="Username"
                 app:hintTextColor="@color/logo_white"
                 app:boxStrokeColor="@color/logo_white"
                 app:boxStrokeWidthFocused="2dp"
@@ -46,11 +46,12 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli"
                     android:textColor="@color/logo_white"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textAutoComplete"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,6 +72,7 @@
                 android:textColorHint="@color/logo_white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/login_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/muli"
@@ -80,6 +82,8 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/login_login_btn"
+                android:onClick="loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Login"
