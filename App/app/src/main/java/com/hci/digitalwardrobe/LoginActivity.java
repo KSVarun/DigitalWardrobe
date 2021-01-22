@@ -42,9 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginButton(View view) {
-//        Button registerUserButton = findViewById(R.id.login_login_btn);
-//
-//        registerUserButton.setOnClickListener(view -> {
 
             UserApi api = WardrobeFactory.getInstance().getRetrofit().create(UserApi.class);
             CreateUserModel createUserModel = prepareDataForUserModel();
@@ -54,13 +51,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Response<CreateUserModel> response) {
                     if (response.code() == 200) {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                         startActivity(intent);
-                        //Todo: Akshay redirect after success user registration
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),"Authentication failed",Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getApplicationContext(),"Authentication failed",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
 

@@ -22,13 +22,14 @@ from digitalwardrobe.image_background_remove_tool.main import cli
 def testAPISet(request):
     return JsonResponse({'mystring': "Hello From Bayreuth"})
 
+
 @api_view(['POST'])
 def create_user(request):
     print(request.data)
 
     try:
 
-        user = User.objects.create_user\
+        user = User.objects.create_user \
             (request.data.get("userName"), "", request.data.get("password"))
         user.gender = request.data.get("gender")
         user.first_name = request.data.get("firstName")
@@ -38,6 +39,7 @@ def create_user(request):
         return HttpResponseBadRequest("Either user already exists or this action is not permitted");
 
     return JsonResponse(request.data)
+
 
 @api_view(['POST'])
 def login_user(request):
