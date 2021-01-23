@@ -200,3 +200,7 @@ media/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
+
+Server/digitalwardrobe/image_background_remove_tool/models/*
+
+

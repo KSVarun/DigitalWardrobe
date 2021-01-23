@@ -99,7 +99,10 @@ def process(input_path, output_path, model_name="u2net",
                        "(u2net)")
         model_name = "u2net"  # If the model line is wrong, select the model with better quality.
         model = model_detect(model_name)  # Load model
-    preprocessing_method = preprocessing.method_detect(preprocessing_method_name)
+    try:
+        preprocessing_method = preprocessing.method_detect(preprocessing_method_name)
+    except Exception as e:
+        print(e)
     postprocessing_method = postprocessing.method_detect(postprocessing_method_name)
     wmode = __work_mode__(input_path)  # Get work mode
     if wmode == "file":  # File work mode
@@ -137,7 +140,7 @@ def cli(input_image):
     # args = parser.parse_args()
     # Parse arguments
     input_path = input_image
-    output_path = "D:/"
+    output_path = os.getcwd() + '/image_server/'
     model_name = "u2net"
     preprocessing_method_name = "bbd-fastrcnn"
     postprocessing_method_name = "rtb-bnb"

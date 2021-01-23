@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
-# from digitalwardrobe.api.models import Clothes
+from digitalwardrobe.api.models import Clothes
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,7 +15,19 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
-# class ClothesSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Clothes
-#         fields = ['name','created_at','weather','r_type']
+class ClothesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clothes
+        fields = ['Name','created_at','Username', 'Weather', 'Sleevelength', 'Category', 'Neckline',
+                  'Placket','Pattern', 'Skin_exposure','Collar', 'Gender','Scarf', 'Necktie']
+
+
+
+
+
+
+
+
+
+
+
