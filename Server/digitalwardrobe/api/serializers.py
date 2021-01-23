@@ -18,4 +18,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class ClothesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothes
-        fields = ['name','created_at','weather','r_type']
+        fields = ['Name','created_at','Username', 'Weather', 'Sleevelength', 'Category', 'Neckline',
+                  'Placket','Pattern', 'Skin_exposure','Collar', 'Gender','Scarf', 'Necktie']
+
+
+
+
+
+
+
+
+
+
+

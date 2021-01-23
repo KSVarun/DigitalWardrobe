@@ -12,6 +12,18 @@ public class WardrobeFactory {
     private static Context appContext;
     private static WardrobeFactory instance = null;
     private static Retrofit retrofit;
+    private static String username;
+
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        WardrobeFactory.username = username;
+    }
+
+
 
     public static void init(Context context) {
         appContext = context;
@@ -36,4 +48,6 @@ public class WardrobeFactory {
                 (instance = new WardrobeFactory()):
                 instance;
     }
+
+
 }

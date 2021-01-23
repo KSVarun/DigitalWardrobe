@@ -8,9 +8,9 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
-
     path(r'createUser/', views.create_user),
     path(r'authenticateUser/', views.login_user),
     path(r'get/', views.testAPISet),
     path(r'predict/', views.predict_attributes),
+    path(r'add_clothes/', views.add_clothes),
 ]
