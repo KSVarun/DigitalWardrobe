@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -43,6 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(RegistrationActivity.this, pairs);
         startActivity(intent, options.toBundle());
+        finish();
     }
 
     public void userRegistrationSubmitButton(View view) {

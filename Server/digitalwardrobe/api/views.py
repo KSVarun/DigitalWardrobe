@@ -29,8 +29,7 @@ def create_user(request):
 
     try:
 
-        user = User.objects.create_user \
-            (request.data.get("userName"), "", request.data.get("password"))
+        user = User.objects.create_user(request.data.get("userName"), "", request.data.get("password"))
         user.gender = request.data.get("gender")
         user.first_name = request.data.get("firstName")
         user.last_name = request.data.get("lastName")
@@ -56,7 +55,9 @@ def login_user(request):
 
 @api_view(['POST'])
 def predict_attributes(request):
-    temp = request.data.get('file')
+    temp = request.data.get('clothImage')
+    print(type(temp))
+    print(temp)
     try:
         with open(temp.name, "wb") as file:
             file.write(temp.read())

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
+import android.view.Window;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeActivity.this, pairs);
         startActivity(intent, options.toBundle());
+        finish();
     }
 
     public void redirectToRegistrationScreen(View view) {
@@ -32,6 +35,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeActivity.this, pairs);
         startActivity(intent, options.toBundle());
+        finish();
     }
 
 }
