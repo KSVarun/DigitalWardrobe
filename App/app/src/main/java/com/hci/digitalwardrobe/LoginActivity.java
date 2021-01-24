@@ -49,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Response<CreateUserModel> response) {
                     if (response.code() == 200) {
+                        WardrobeFactory factory = WardrobeFactory.getInstance();
+                        factory.setUsername(createUserModel.getUserName());
                         Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
                         startActivity(intent);
                     }

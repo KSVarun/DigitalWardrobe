@@ -11,7 +11,8 @@ from rest_framework import permissions
 from rest_framework.decorators import api_view
 from rest_framework.views import exception_handler
 
-from digitalwardrobe.api.serializers import UserSerializer, GroupSerializer
+from digitalwardrobe.api.models import Clothes
+from digitalwardrobe.api.serializers import UserSerializer, GroupSerializer, ClothesSerializer
 from django.http import JsonResponse
 from digitalwardrobe.image_background_remove_tool.main import cli
 import digitalwardrobe.clothing_attributes_detection.app.main as cad
@@ -62,13 +63,23 @@ def predict_attributes(request):
         with open(temp.name, "wb") as file:
             file.write(temp.read())
             file.close()
-            cli(temp.name)
-            result = cad.test(temp.name)
+        cli(temp.name)
+        result = cad.test(temp.name)
 
     finally:
         os.remove(temp.name)
 
     return JsonResponse(result)
+
+@api_view(['POST'])
+def add_clothes(request):
+    print(type(request.data))
+    data = request.data
+    data["User"] = User.objects.get(username=data["User"])
+    cloth = Clothes(**data)
+    cloth.save()
+    return HttpResponse(cloth)
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
