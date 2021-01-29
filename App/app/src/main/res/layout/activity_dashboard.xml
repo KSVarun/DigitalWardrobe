@@ -9,6 +9,7 @@
         android:id="@+id/text_button1"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:text="My Wardrobe"
+        android:onClick="openWardrobe"
         android:fontFamily="@font/muli_black"
         app:strokeColor="@color/black"
         android:theme="@style/Dashboard"

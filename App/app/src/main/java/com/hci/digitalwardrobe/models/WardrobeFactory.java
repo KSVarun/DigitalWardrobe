@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.hci.digitalwardrobe.R;
 
-import retrofit2.GsonConverterFactory;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WardrobeFactory {
 

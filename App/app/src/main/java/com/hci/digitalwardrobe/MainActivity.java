@@ -24,7 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import retrofit2.Call;
-import retrofit2.GsonConverterFactory;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -71,16 +70,18 @@ public class MainActivity extends AppCompatActivity {
             Call<ClothesModel> call = api.getClothes();
             call.enqueue(new Callback<ClothesModel>() {
                 @Override
-                public void onResponse(Response<ClothesModel> response) {
+                public void onResponse(Call<ClothesModel> call, Response<ClothesModel> response) {
                     ClothesModel resource = response.body();
                     String text = resource.mystring;
                     Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
                 }
 
                 @Override
-                public void onFailure(Throwable t) {
+                public void onFailure(Call<ClothesModel> call, Throwable t) {
 
                 }
+
+
             });
 
         });

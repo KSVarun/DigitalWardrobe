@@ -18,4 +18,9 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AddClothesActivity.class);
         startActivity(intent);
     }
+
+    public void openWardrobe(View view) {
+        Intent intent = new Intent(getApplicationContext(), MyWardrobeActivity.class);
+        startActivity(intent);
+    }
 }

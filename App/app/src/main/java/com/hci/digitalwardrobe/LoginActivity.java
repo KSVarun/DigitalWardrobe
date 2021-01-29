@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-//        loginButton();
     }
 
     public void redirectToRegistrationScreen(View view) {
@@ -39,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, pairs);
         startActivity(intent, options.toBundle());
+        finish();
     }
 
     public void loginButton(View view) {
@@ -49,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             Call<CreateUserModel> call = api.authenticateUser(createUserModel);
             call.enqueue(new Callback<CreateUserModel>() {
                 @Override
-                public void onResponse(Response<CreateUserModel> response) {
+                public void onResponse(Call<CreateUserModel> call, Response<CreateUserModel> response) {
                     if (response.code() == 200) {
                         WardrobeFactory factory = WardrobeFactory.getInstance();
                         factory.setUsername(createUserModel.getUserName());
@@ -63,12 +61,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Throwable t) {
+                public void onFailure(Call<CreateUserModel> call, Throwable t) {
                     Log.d("Failed========", t.getMessage());
                     Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
-//        });
     }
 
     private CreateUserModel prepareDataForUserModel() {

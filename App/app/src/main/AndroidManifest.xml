@@ -3,40 +3,51 @@
     package="com.hci.digitalwardrobe">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <queries>
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-    </queries>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DigitalWardrobe">
-        <activity android:name=".AddClothesActivity" />
+        <activity android:name=".MyWardrobeActivity"
+            android:parentActivityName=".DashboardActivity">
+        </activity>
+        <activity android:name=".ClothDetailsActivity"
+            android:parentActivityName=".AddClothesActivity">
+        </activity>
+        <activity
+            android:name=".AddClothesActivity"
+            android:parentActivityName=".DashboardActivity">
+
+        </activity>
         <activity android:name=".DashboardActivity" />
         <activity android:name=".TravelRecommendation" />
         <activity android:name=".RecommendActivity" />
-        <activity android:name=".WelcomeActivity" />
+        <activity
+            android:name=".WelcomeActivity"
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
+
+        </activity>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.DigitalWardrobe" />
+            android:theme="@style/Theme.Start" />
         <activity
             android:name=".RegistrationActivity"
-            android:theme="@style/Theme.DigitalWardrobe" />
+            android:theme="@style/Theme.Start" />
 
         <meta-data
             android:name="preloaded_fonts"
