@@ -8,6 +8,8 @@ class Clothes(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     Created_at = models.DateTimeField(auto_now=True)
     Weather = models.CharField(max_length=100,default="all")
+    Min_temp = models.FloatField(default=-9999)
+    Max_temp = models.FloatField(default=-9999)
     Category  = models.CharField(max_length=100,default="")
     Sleevelength = models.CharField(max_length=100,default="")
     Neckline  = models.CharField(max_length=100,default="")
@@ -19,8 +21,3 @@ class Clothes(models.Model):
     Necktie = models.CharField(max_length=100,default="")
     Placket = models.CharField(max_length=100,default="")
     Image = models.CharField(max_length=100, default ="")
-
-
-
-    def __str__(self):
-        return self.Name
