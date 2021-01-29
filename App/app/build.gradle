@@ -42,4 +42,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.github.maayyaannkk:ImagePicker:1.0.9'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

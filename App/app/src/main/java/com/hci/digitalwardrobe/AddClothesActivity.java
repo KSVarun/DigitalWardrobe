@@ -40,6 +40,8 @@ public class AddClothesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_clothes);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         WardrobeFactory.init(getApplicationContext());
     }
 
@@ -47,7 +49,7 @@ public class AddClothesActivity extends AppCompatActivity {
         //startActivity(new Intent(getApplicationContext(), ImageSelectActivity.class));
         //ImageSelectActivity.startImageSelectionForResult(this, true, true, true, false, 1213);
         Intent intent = new Intent(this, ImageSelectActivity.class);
-        intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, false);//default is true
+        intent.putExtra(ImageSelectActivity.FLAG_COMPRESS, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CAMERA, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_GALLERY, true);//default is true
         intent.putExtra(ImageSelectActivity.FLAG_CROP, false);//default is false
@@ -59,11 +61,10 @@ public class AddClothesActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1213 && resultCode == Activity.RESULT_OK) {
             String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
-            Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
+//            Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
 
             File image_file = new File(filePath);
             System.out.println(image_file);
-
 
             UploadClothesPrediction api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesPrediction.class);
             PredictClothesModel predictClothesModel = new PredictClothesModel();
@@ -76,7 +77,7 @@ public class AddClothesActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         Log.i("2.0 getFeed > Full json res wrapped in gson => ",new Gson().toJson(response));
 
-                        Intent intent = new Intent(getApplicationContext(), ClothesDetailsActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ClothDetailsActivity.class);
                         startActivity(intent);
                         finish();
                     }

@@ -56,7 +56,7 @@ def login_user(request):
 
 @api_view(['POST'])
 def predict_attributes(request):
-    temp = request.data.get('clothImage')
+    temp = request.data.get('image')
     print(type(temp))
     print(temp)
     try:
