@@ -61,19 +61,21 @@ public class AddClothesActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1213 && resultCode == Activity.RESULT_OK) {
             String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
-//            Bitmap selectedImage = BitmapFactory.decodeFile(filePath);
-
-            File image_file = new File(filePath);
-            System.out.println(image_file);
+            File file = new File(filePath);
+            RequestBody fileBody;
+            RequestBody textBody;
+            fileBody = RequestBody.create(okhttp3.MediaType.parse("*/*"), file);
+            textBody = RequestBody.create(okhttp3.MediaType.parse("text/plain"), "anuj");
 
             UploadClothesPrediction api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesPrediction.class);
-            PredictClothesModel predictClothesModel = new PredictClothesModel();
-            predictClothesModel.setClothImage(image_file);
 
-            Call<PredictClothesModel> call = api.predictClothes(predictClothesModel);
+            MultipartBody.Part body =
+                    MultipartBody.Part.createFormData("file", file.getName(), fileBody);
+
+            Call<PredictClothesModel> call = api.predictClothes(body, textBody);
             call.enqueue(new Callback<PredictClothesModel>() {
                 @Override
-                public void onResponse(Response<PredictClothesModel> response) {
+                public void onResponse(Call<PredictClothesModel> call, Response<PredictClothesModel> response) {
                     if (response.code() == 200) {
                         Log.i("2.0 getFeed > Full json res wrapped in gson => ",new Gson().toJson(response));
 
@@ -88,11 +90,14 @@ public class AddClothesActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Throwable t) {
+                public void onFailure(Call<PredictClothesModel> call, Throwable t) {
                     Log.d("Failed========", t.getMessage());
                     Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }
     }
+
+
+
 }

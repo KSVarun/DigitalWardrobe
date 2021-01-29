@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.core import serializers
 from django.http.multipartparser import MultiPartParser
 from django.shortcuts import render
 
@@ -19,9 +20,15 @@ import digitalwardrobe.clothing_attributes_detection.app.main as cad
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from digitalwardrobe.image_background_remove_tool.main import cli
 
-
+@api_view(['GET'])
 def testAPISet(request):
-    return JsonResponse({'mystring': "Hello From Bayreuth"})
+
+    cloth = Clothes.objects.filter(Min_temp__lt=20)
+    qs_json = serializers.serialize('json', cloth)
+    print("==========================ANUJ===========================")
+    print(qs_json)
+    print("==========================ANUJ===========================")
+    return HttpResponse(qs_json, content_type='application/json')
 
 
 @api_view(['POST'])
@@ -56,9 +63,9 @@ def login_user(request):
 
 @api_view(['POST'])
 def predict_attributes(request):
-    temp = request.data.get('image')
-    print(type(temp))
-    print(temp)
+
+    temp = request.data.get("file")
+    print(request.FILES)
     try:
         with open(temp.name, "wb") as file:
             file.write(temp.read())

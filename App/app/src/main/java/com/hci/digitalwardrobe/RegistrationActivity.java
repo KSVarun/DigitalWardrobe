@@ -55,7 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Call<CreateUserModel> call = api.createUser(createUserModel);
             call.enqueue(new Callback<CreateUserModel>() {
                 @Override
-                public void onResponse(Response<CreateUserModel> response) {
+                public void onResponse(Call<CreateUserModel> call, Response<CreateUserModel> response) {
                     if (response.code() == 200) {
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Throwable t) {
+                public void onFailure(Call<CreateUserModel> call, Throwable t) {
                     Log.d("Failed========", t.getMessage());
                     Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
                 }
