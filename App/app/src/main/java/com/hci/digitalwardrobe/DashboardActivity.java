@@ -23,4 +23,14 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MyWardrobeActivity.class);
         startActivity(intent);
     }
+
+    public void openRecommendActivities(View view) {
+        Intent intent = new Intent(getApplicationContext(), RecommendActivity.class);
+        startActivity(intent);
+    }
+
+    public void openRecommendTravel(View view){
+        Intent intent = new Intent(getApplicationContext(), TravelRecommendation.class);
+        startActivity(intent);
+    }
 }

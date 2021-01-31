@@ -19,4 +19,4 @@ class ClothesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothes
         fields = ['Name','created_at','Username', 'Weather', 'Sleevelength', 'Category', 'Neckline',
-                  'Placket','Pattern', 'Skin_exposure','Collar', 'Gender','Scarf', 'Necktie', 'Min_temp', 'Min_temp']
+                  'Placket','Pattern', 'Skin_exposure','Collar', 'Gender','Scarf', 'Necktie', 'Max_temp', 'Min_temp']

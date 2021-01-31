@@ -20,4 +20,4 @@ class Clothes(models.Model):
     Scarf = models.CharField(max_length=100,default="")
     Necktie = models.CharField(max_length=100,default="")
     Placket = models.CharField(max_length=100,default="")
-    Image = models.CharField(max_length=100, default ="")
+    Image = models.CharField(max_length=100, default="")

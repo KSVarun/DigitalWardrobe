@@ -13,4 +13,5 @@ urlpatterns = [
     path(r'get/', views.testAPISet),
     path(r'predict/', views.predict_attributes),
     path(r'add_clothes/', views.add_clothes),
+    path(r'calc_travel/', views.calc_travel_items)
 ]

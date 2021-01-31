@@ -37,13 +37,4 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
-    public void redirectToMainScreen(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        Pair[] pairs = new Pair[1];
-        pairs[0] = new Pair<View, String>(findViewById(R.id.test), "transition_login");
-
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(WelcomeActivity.this, pairs);
-        startActivity(intent, options.toBundle());
-    }
-
 }

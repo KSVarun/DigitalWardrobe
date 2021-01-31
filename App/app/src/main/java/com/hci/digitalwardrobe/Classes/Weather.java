@@ -1,4 +1,4 @@
-package com.hci.digitalwardrobe;
+package com.hci.digitalwardrobe.Classes;
 
 import android.os.AsyncTask;
 import android.util.Log;

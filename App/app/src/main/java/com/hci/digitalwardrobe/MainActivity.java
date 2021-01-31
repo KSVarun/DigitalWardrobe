@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         configureWeatherButton();
-        apiTestButton ();
 
     }
 
@@ -62,29 +61,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void apiTestButton() {
-        Button nextButton = findViewById(R.id.ButtonAPI);
-        nextButton.setOnClickListener(view -> {
-            WardrobeFactory factory = WardrobeFactory.getInstance();
-            UploadClothesAPI api = factory.getRetrofit().create(UploadClothesAPI.class);
-            Call<ClothesModel> call = api.getClothes();
-            call.enqueue(new Callback<ClothesModel>() {
-                @Override
-                public void onResponse(Call<ClothesModel> call, Response<ClothesModel> response) {
-                    ClothesModel resource = response.body();
-                    String text = resource.mystring;
-                    Toast.makeText(getApplicationContext(),text,Toast.LENGTH_LONG).show();
-                }
-
-                @Override
-                public void onFailure(Call<ClothesModel> call, Throwable t) {
-
-                }
-
-
-            });
-
-        });
-
-    }
 }

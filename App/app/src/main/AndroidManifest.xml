@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
@@ -25,6 +31,9 @@
             android:parentActivityName=".DashboardActivity">
 
         </activity>
+
+        <activity android:name=".FinalActivity"></activity>
+
         <activity android:name=".DashboardActivity" />
         <activity android:name=".TravelRecommendation" />
         <activity android:name=".RecommendActivity" />

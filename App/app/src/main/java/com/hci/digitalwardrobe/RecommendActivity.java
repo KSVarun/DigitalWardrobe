@@ -2,6 +2,7 @@ package com.hci.digitalwardrobe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,9 +10,26 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.JsonObject;
+import com.hci.digitalwardrobe.Classes.Clothes_temp;
+import com.hci.digitalwardrobe.Classes.Weather;
+import com.hci.digitalwardrobe.calls.UploadClothesAPI;
+import com.hci.digitalwardrobe.models.ClothesModel;
+import com.hci.digitalwardrobe.models.WardrobeFactory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RecommendActivity extends AppCompatActivity {
 
@@ -28,11 +46,11 @@ public class RecommendActivity extends AppCompatActivity {
 
     // TODO implement function that gets user gender
     String gender = "female";
-    private Activities activity = Activities.BUSINESS;
+    private Activities activity = Activities.WORK;
     private TravelRecommendation.Condition condition = TravelRecommendation.Condition.CLEAR;
 
     public enum Activities {
-        UNIVERSITY,SPORTS_OUTDOOR,BUSINESS,
+        UNIVERSITY,SPORTS_OUTDOOR, WORK,
     }
     //Function that gets called when searchButton gets clicked. Calculates Weather data and calls other functions to predict one clothing item.
     public void search(View view){
@@ -74,8 +92,14 @@ public class RecommendActivity extends AppCompatActivity {
             String spinner_text = mySpinner.getSelectedItem().toString();
             setActivity(spinner_text);
             Log.i("condition", condition.toString());
+            String cloth = ":)";
+            ArrayList<Clothes_temp> list = PredictCloth(activity,temperatureInt,condition);
 
-            String cloth = PredictCloth(activity,temperatureInt,condition);
+            Intent intent = new Intent(getApplicationContext(), FinalActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("List", list);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
             String resultText = "Main : "+ main +
                     "\nTemperature : " + temperature +
@@ -91,13 +115,19 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     //Function that calculates one clothing item based of activity, temperature and weather condition.
-    public String PredictCloth(Activities activity, float temperature, TravelRecommendation.Condition condition){
-        String clothitem = "";
+    public ArrayList<Clothes_temp> PredictCloth(Activities activity, float temperature, TravelRecommendation.Condition condition){
+        Map<String,String> map= new HashMap<>();
+        String clothitem;
+        map.put("Condition", condition.toString());
+        map.put("Activity", activity.toString());
+        map.put("Temperature", Float.toString(temperature));
         switch (activity){
             case SPORTS_OUTDOOR:
+                map.put("Activity", activity.toString());
                 switch(condition) {
                     case RAIN:
                     case SNOW:
+                        map.put("Condition", condition.toString());
                         if (temperature < 0) clothitem = "Winter jacket";
                         else if (temperature > 0 && temperature < 10) clothitem = "Rain jacket";
                         else if (temperature > 10 && temperature < 18) clothitem = "Rain jacket";
@@ -106,6 +136,7 @@ public class RecommendActivity extends AppCompatActivity {
                         break;
                     case CLEAR:
                     case CLOUDS:
+                        map.put("Condition", condition.toString());
                         if (temperature < 0) clothitem = "Winter jacket";
                         else if (temperature > 0 && temperature < 10) clothitem = "Jacket";
                         else if (temperature > 10 && temperature < 18) clothitem = "Long sleeve sport shirt";
@@ -116,8 +147,8 @@ public class RecommendActivity extends AppCompatActivity {
                         clothitem = "t-shirt";
                 }
             break;
-            case BUSINESS:
-
+            case WORK:
+                map.put("Activity", activity.toString());
                 if(gender=="male"){
                     if(temperature<22) clothitem = "Suit";
                     else clothitem = "Shirt";
@@ -128,6 +159,7 @@ public class RecommendActivity extends AppCompatActivity {
                 }
             break;
             case UNIVERSITY:
+                map.put("Activity", activity.toString());
                 if(gender=="male"){
                     if (temperature < 0) clothitem = "Sweatshirt";
                     else if (temperature > 0 && temperature < 10) clothitem = "Sweatshirt";
@@ -146,8 +178,84 @@ public class RecommendActivity extends AppCompatActivity {
             default:
                 clothitem = "t-shirt";
         }
+        UploadClothesAPI api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesAPI.class);
 
-        return clothitem;
+        map.put("User", "test123");
+
+
+        Call<List<ClothesModel>> call = api.getActivityClothes(map);
+        call.enqueue(new Callback<List<ClothesModel>>() {
+            @Override
+            public void onResponse(Call<List<ClothesModel>> call, Response<List<ClothesModel>> response) {
+                if (response.code() == 200) {
+                    Log.i("_____________________________________", "works");
+                    List<ClothesModel> clothes = response.body();
+                    int size = clothes.size();
+                    String stringsize = Integer.toString(size);
+                    ArrayList<Clothes_temp> clothlist = new ArrayList<>();
+                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket, Suit;
+                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = Suit = false;
+
+                    for(ClothesModel c: clothes){
+                        Log.d("Category:____________", c.getCategory());
+                        String category = c.getCategory();
+                        String sleevelength = c.getSleevelength();
+                        if(category.equals("Trousers") && trousers == false) {
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            trousers = true;
+                        }
+                        else if(category.equals("Shirt")&& Shirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Shirt = true;
+                        }
+                        else if(category.equals("T-shirt")&& Tshirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Tshirt = true;
+                        }
+                        else if(category.equals("Sweater")&& Sweater ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Sweater = true;
+                        }
+                        else if(category.equals("Jacket")&& Jacket ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Jacket = true;
+                        }
+                        else if(category.equals("Coat")&& Coat ==false && Rainjacket == false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Coat = true;
+                        }
+                        else if(category.equals("Rain Jacket")&& Rainjacket ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Rainjacket = true;
+                        }
+                        else if(category.equals("Suit")&& Suit ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Suit = true;
+                        }
+                    }
+                    Intent intent = new Intent(getApplicationContext(), FinalActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("List", clothlist);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Authentication failed",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ClothesModel>> call, Throwable t) {
+                Log.d("Failed========", t.getMessage());
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+
+        });
+        ArrayList<Clothes_temp> clothlist1 = new ArrayList<>();
+        return clothlist1;
     }
 
     // Function to set the Weather condition based on API data.
@@ -163,7 +271,7 @@ public class RecommendActivity extends AppCompatActivity {
     // Function to set the activity based on what the user selected in the drop down menu mySpinner.
     public void setActivity(String act){
         String university = "University";
-        String business = "Business";
+        String work = "Work";
         String sport = "Sports (Outdoor)";
         if(act.equals(sport)){
             activity = Activities.SPORTS_OUTDOOR;
@@ -171,8 +279,8 @@ public class RecommendActivity extends AppCompatActivity {
         else if(act.equals(university)){
             activity = Activities.UNIVERSITY;
         }
-        else if(act.equals(business)){
-            activity = Activities.BUSINESS;
+        else if(act.equals(work)){
+            activity = Activities.WORK;
         }
         else activity = Activities.UNIVERSITY;
     }

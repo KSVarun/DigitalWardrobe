@@ -1,11 +1,14 @@
+import json
+
 from django.contrib.auth import authenticate
 from django.core import serializers
+
 from django.http.multipartparser import MultiPartParser
 from django.shortcuts import render
 
 # Create your views here.
 import os
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, models
 from djongo.database import DatabaseError
 from rest_framework import viewsets
 from rest_framework import permissions
@@ -20,15 +23,68 @@ import digitalwardrobe.clothing_attributes_detection.app.main as cad
 from django.http import JsonResponse, HttpResponse, HttpResponseBadRequest
 from digitalwardrobe.image_background_remove_tool.main import cli
 
-@api_view(['GET'])
-def testAPISet(request):
 
-    cloth = Clothes.objects.filter(Min_temp__lt=20)
-    qs_json = serializers.serialize('json', cloth)
-    print("==========================ANUJ===========================")
-    print(qs_json)
-    print("==========================ANUJ===========================")
-    return HttpResponse(qs_json, content_type='application/json')
+@api_view(['POST'])
+def testAPISet(request):
+    activity = request.data.get("Activity")
+    temperature = request.data.get("Temperature")
+    condition = request.data.get("Condition")
+    print(activity)
+    print(temperature)
+    print(condition)
+
+    data = request.data
+    user = User.objects.get(username=data["User"])
+
+    if activity == "UNIVERSITY":
+        if condition == "RAIN" or condition == "SNOW":
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Rain Jacket", "Coat"])
+        else:
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Jacket", "Coat"])
+    elif activity == "SPORTS_OUTDOOR":
+        if condition == "RAIN" or condition == "SNOW":
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Rain Jacket"])
+        else:
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Jacket"])
+    elif activity == "WORK":
+        if condition == "RAIN" or condition == "SNOW":
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Rain Jacket", "Coat"])
+        else:
+            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Jacket", "Coat"])
+
+    #qs_json = serializers.serialize('json', cloth)
+    #return HttpResponse(qs_json, content_type='application/json')
+    return JsonResponse(list(cloth.values()), safe=False)
+
+
+@api_view(['POST'])
+def calc_travel_items(request):
+    temp = request.data.get("Temperature")
+    pop = request.data.get("POP")
+    print(pop)
+    print(temp)
+    print("_____________________________________________________________________")
+    pop = float(pop)
+
+    data = request.data
+    user = User.objects.get(username=data["User"])
+    if pop < 0.3:
+        cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+            Category__in=["Trousers", "Shirt", "T-shirt", "Sweater", "Jacket", "Coat"])
+    else:
+        cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+            Category__in=["Trousers", "Shirt", "T-shirt", "Sweatshirts", "Rain Jacket", "Coat"])
+
+    #qs_json = serializers.serialize('json', cloth)
+    #print(qs_json)
+    #return HttpResponse(qs_json, content_type='application/json')
+    return JsonResponse(list(cloth.values()), safe=False)
 
 
 @api_view(['POST'])
@@ -43,7 +99,7 @@ def create_user(request):
         user.last_name = request.data.get("lastName")
         user.save()
     except DatabaseError:
-        return HttpResponseBadRequest("Either user already exists or this action is not permitted");
+        return HttpResponseBadRequest("Either user already exists or this action is not permitted")
 
     return JsonResponse(request.data)
 
@@ -63,7 +119,6 @@ def login_user(request):
 
 @api_view(['POST'])
 def predict_attributes(request):
-
     temp = request.data.get("file")
     print(request.FILES)
     try:
@@ -78,6 +133,7 @@ def predict_attributes(request):
 
     return JsonResponse(result)
 
+
 @api_view(['POST'])
 def add_clothes(request):
     print(type(request.data))
@@ -86,7 +142,6 @@ def add_clothes(request):
     cloth = Clothes(**data)
     cloth.save()
     return HttpResponse(cloth)
-
 
 
 class UserViewSet(viewsets.ModelViewSet):

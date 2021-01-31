@@ -2,18 +2,34 @@ package com.hci.digitalwardrobe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.hci.digitalwardrobe.Classes.Clothes_temp;
+import com.hci.digitalwardrobe.Classes.Weather;
+import com.hci.digitalwardrobe.calls.UploadClothesAPI;
+import com.hci.digitalwardrobe.models.ClothesModel;
+import com.hci.digitalwardrobe.models.WardrobeFactory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TravelRecommendation extends AppCompatActivity {
 
@@ -131,27 +147,116 @@ public class TravelRecommendation extends AppCompatActivity {
     }
 
     public String predictCloth(float temp, float pop){
+        String Temperature = Float.toString(temp);
+        String POP = Float.toString(pop);
         String clothingitem = "";
+        Map<String,String> map= new HashMap<>();
+        map.put("Temperature", Temperature);
+        map.put("POP", POP);
         if(temp<0){
+            map.put("Temperature", Temperature);
+            map.put("POP", POP);
             if(pop< POP_THRESHOLD) clothingitem = "Winter coat";
             else clothingitem = "Winter jacket";
         }
         else if(0<=temp && temp<10){
+            map.put("Temperature", Temperature);
+            map.put("POP", POP);
             if(pop< POP_THRESHOLD) clothingitem = "down jacket";
             else clothingitem = "Rain coat";
         }
         else if(10<=temp && temp<18){
+            map.put("Temperature", Temperature);
+            map.put("POP", POP);
             if(pop< POP_THRESHOLD) clothingitem = "Jacket";
             else clothingitem = "Rain jacket";
         }
         else if(18<=temp && temp<22){
+            map.put("Temperature", Temperature);
+            map.put("POP", POP);
             if(pop< POP_THRESHOLD) clothingitem = "Shirt";
             else clothingitem = "Windbreaker";
         }
         else{
+            map.put("Temperature", Temperature);
+            map.put("POP", POP);
             if(pop< POP_THRESHOLD) clothingitem = "T-Shirt";
             else clothingitem = "Windbreaker";
         }
+
+        map.put("User", "test123");
+
+        UploadClothesAPI api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesAPI.class);
+
+        Call<List<ClothesModel>> call = api.getFilteredClothes(map);
+        call.enqueue(new Callback<List<ClothesModel>>() {
+            @Override
+            public void onResponse(Call<List<ClothesModel>> call, Response<List<ClothesModel>> response) {
+                int test = response.code();
+                String stringtest = Integer.toString(test);
+                if (response.code() == 200) {
+                    Log.i("_____________________________________", "works");
+                    List<ClothesModel> clothes = response.body();
+                    int size = clothes.size();
+                    String stringsize = Integer.toString(size);
+                    ArrayList<Clothes_temp> clothlist = new ArrayList<>();
+                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket;
+                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = false;
+
+                    for(ClothesModel c: clothes){
+                        Log.d("Category:____________", c.getCategory());
+                        String category = c.getCategory();
+                        String sleevelength = c.getSleevelength();
+                        if(category.equals("Trousers") && trousers == false) {
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            trousers = true;
+                        }
+                        else if(category.equals("Shirt")&& Shirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Shirt = true;
+                        }
+                        else if(category.equals("T-shirt")&& Tshirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Tshirt = true;
+                        }
+                        else if(category.equals("Sweater")&& Sweater ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Sweater = true;
+                        }
+                        else if(category.equals("Jacket")&& Jacket ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Jacket = true;
+                        }
+                        else if(category.equals("Coat")&& Coat ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Coat = true;
+                        }
+                        else if(category.equals("Rain Jacket")&& Rainjacket ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Rainjacket = true;
+                        }
+                    }
+                    Intent intent = new Intent(getApplicationContext(), FinalActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("List", clothlist);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),stringtest,
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ClothesModel>>call, Throwable t) {
+                Log.d("Failed========", t.getMessage());
+                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
         return clothingitem;
     }
 
