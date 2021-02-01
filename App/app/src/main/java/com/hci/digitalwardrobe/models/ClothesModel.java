@@ -20,6 +20,7 @@ public class ClothesModel {
     String Necktie;
     String Placket;
     String Image;
+    String Colour;
 
     public ClothesModel(int Id, String name, String user, String created_at, String weather, Float min_temp, Float max_temp, String category, String sleevelength, String neckline, String pattern, String skin_exposure, String collar, String gender, String scarf, String necktie, String placket, String image) {
         id = Id;
@@ -40,6 +41,14 @@ public class ClothesModel {
         Necktie = necktie;
         Placket = placket;
         Image = image;
+    }
+
+    public String getColour() {
+        return Colour;
+    }
+
+    public void setColour(String colour) {
+        Colour = colour;
     }
 
     public int getId(){

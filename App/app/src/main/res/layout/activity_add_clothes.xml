@@ -51,7 +51,6 @@
             android:indeterminateTint="@color/logo_blue"
             android:indeterminateTintMode="src_atop"
             android:visibility="gone"/>
->>>>>>> Stashed changes
 
     </LinearLayout>
 

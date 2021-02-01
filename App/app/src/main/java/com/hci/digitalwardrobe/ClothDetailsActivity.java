@@ -49,7 +49,8 @@ public class ClothDetailsActivity extends AppCompatActivity {
 
 
         String[] category_options = new String[] {"Shirt", "Sweater", "T-shirt", "Outerwear", "Suit",
-                "Tank Top", "Dress", "Trousers", "Rain Jacket", "Jacket", "Formal Wear"};
+                "Tank Top", "Dress", "Trousers", "Rain Jacket", "Jacket", "Formal Wear",
+                "Sport Pants", "Sport Shirt"};
 
         String[] weather_options = new String[] {"Summer", "Spring", "Autumn", "Winter",
                 "Rainy", "All"};
