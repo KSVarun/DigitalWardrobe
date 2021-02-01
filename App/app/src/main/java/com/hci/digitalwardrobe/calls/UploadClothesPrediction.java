@@ -3,7 +3,6 @@ package com.hci.digitalwardrobe.calls;
 import com.hci.digitalwardrobe.models.PredictClothesModel;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Multipart;
@@ -14,7 +13,10 @@ public interface UploadClothesPrediction {
 
     @Multipart
     @POST("predict/")
-    Call<PredictClothesModel> predictClothes(@Part MultipartBody.Part file, @Part("file") RequestBody name);
+    Call<PredictClothesModel> predictClothes(@Part MultipartBody.Part file);
 
+
+    @POST("add_clothes/")
+    Call<PredictClothesModel> addClothes(@Body PredictClothesModel predictModel);
 
 }

@@ -29,7 +29,6 @@
         <activity
             android:name=".AddClothesActivity"
             android:parentActivityName=".DashboardActivity">
-
         </activity>
 
         <activity android:name=".FinalActivity"></activity>

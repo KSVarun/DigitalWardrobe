@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.hci.digitalwardrobe.R;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,12 +26,17 @@ public class WardrobeFactory {
         WardrobeFactory.username = username;
     }
 
-
-
     public static void init(Context context) {
         appContext = context;
         instance = new WardrobeFactory();
-        retrofit = new Retrofit.Builder()
+
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        retrofit = new Retrofit.Builder().client(okHttpClient)
                 .baseUrl(context.getString(R.string.API_BASE_URL))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

@@ -59,5 +59,7 @@ Execute the setup file in the mentioned folder
 ...\DigitalWardrobe\Server\digitalwardrobe\image_background_remove_tool\setup.bat
 Then choose the u2net model
 
+To run Media Server use the following command:
+python -m http.server 8080
 
 #Johannes Statements

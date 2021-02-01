@@ -59,7 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     if (response.code() == 200) {
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
-                        //Todo: Akshay redirect after success user registration
+                        finish();
                     }
                     else {
                         Toast.makeText(getApplicationContext(),"User already exists",Toast.LENGTH_LONG).show();

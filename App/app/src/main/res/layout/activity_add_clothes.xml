@@ -42,10 +42,16 @@
             android:background="@color/white"
             android:onClick="barcodeView"/>
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="33dp" />
+        <ProgressBar
+            android:paddingTop="30dp"
+            android:id="@+id/loading_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/logo_blue"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"/>
+>>>>>>> Stashed changes
 
     </LinearLayout>
 

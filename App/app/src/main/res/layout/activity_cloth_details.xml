@@ -1,162 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ClothDetailsActivity"
-    android:orientation="vertical"
-    android:background="@color/splash_screen_background">
+    android:background="@color/splash_screen_background"
+    android:padding="30dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/cloth_image"
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
+        android:orientation="vertical"
+        android:background="@color/splash_screen_background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <ImageView
+                android:id="@+id/cloth_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:padding="20dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Dress Name"
-                app:hintTextColor="@color/logo_white"
-                app:boxStrokeColor="@color/logo_white"
-                app:boxStrokeWidthFocused="2dp"
-                app:startIconTint="@color/logo_white"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/logo_white"
-                android:textColorHint="@color/logo_white"
-                >
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dress_name"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/muli"
-                    android:textColor="@color/logo_white"
-                    android:inputType="textAutoComplete"/>
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:hint="Dress Name"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:startIconTint="@color/logo_white"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dress_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white"
+                        android:inputType="textAutoComplete"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/dress_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                android:hint="Dress Category"
-                app:hintTextColor="@color/logo_white"
-                app:boxStrokeColor="@color/logo_white"
-                app:boxStrokeWidthFocused="2dp"
-                app:endIconMode="dropdown_menu"
-                app:endIconTint="@color/logo_white"
-                android:textColorHint="@color/logo_white">
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <AutoCompleteTextView
-                    android:id="@+id/dress_category_dropdown"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dress_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:inputType="none"
-                    android:fontFamily="@font/muli"
-                    android:textColor="@color/logo_white" />
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:hint="Dress Category"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="dropdown_menu"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/dress_category_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="none"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white" />
 
 
-            </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Dress Colour"
-                app:hintTextColor="@color/logo_white"
-                app:boxStrokeColor="@color/logo_white"
-                app:boxStrokeWidthFocused="2dp"
-                app:startIconTint="@color/logo_white"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/logo_white"
-                android:textColorHint="@color/logo_white"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dress_colour"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/muli"
-                    android:textColor="@color/logo_white"
-                    android:inputType="textAutoComplete"/>
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:hint="Dress Colour"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:startIconTint="@color/logo_white"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white"
+                    >
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/dress_colour"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white"
+                        android:inputType="textAutoComplete"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Minimum Weather in Celsius"
-                app:hintTextColor="@color/logo_white"
-                app:boxStrokeColor="@color/logo_white"
-                app:boxStrokeWidthFocused="2dp"
-                app:startIconTint="@color/logo_white"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/logo_white"
-                android:textColorHint="@color/logo_white"
-                >
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/weather_minimum"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dress_weather"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/muli"
-                    android:textColor="@color/logo_white"
-                    android:inputType="number"/>
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:hint="Choose the valid weather for cloth"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:endIconMode="dropdown_menu"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/dress_weather_dropdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="none"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="Maximum Weather in Celsius"
-                app:hintTextColor="@color/logo_white"
-                app:boxStrokeColor="@color/logo_white"
-                app:boxStrokeWidthFocused="2dp"
-                app:startIconTint="@color/logo_white"
-                app:endIconMode="clear_text"
-                app:endIconTint="@color/logo_white"
-                android:textColorHint="@color/logo_white"
-                >
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/weather_maximum"
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:hint="Minimum Weather in Celsius"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:startIconTint="@color/logo_white"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/weather_minimum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:hint="Maximum Weather in Celsius"
+                    app:hintTextColor="@color/logo_white"
+                    app:boxStrokeColor="@color/logo_white"
+                    app:boxStrokeWidthFocused="2dp"
+                    app:startIconTint="@color/logo_white"
+                    app:endIconMode="clear_text"
+                    app:endIconTint="@color/logo_white"
+                    android:textColorHint="@color/logo_white"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/weather_maximum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/muli"
+                        android:textColor="@color/logo_white"
+                        android:inputType="number"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/add_cloth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add Cloth"
+                    android:onClick="addClothes"
+                    android:background="@color/splash_screen_background"
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/muli"
-                    android:textColor="@color/logo_white"
-                    android:inputType="number"/>
+                    android:textColor="@color/logo_white"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/add_cloth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Add Cloth"
-                android:background="@color/splash_screen_background"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/muli"
-                android:textColor="@color/logo_white"/>
+            </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

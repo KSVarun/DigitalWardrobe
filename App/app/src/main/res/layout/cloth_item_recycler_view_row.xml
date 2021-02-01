@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:background="@drawable/cloth_item_recycler_view_bg"
         android:elevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,13 +29,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".9"
-        android:padding="10dp">
+        android:padding="0dp">
 
         <TextView
             android:id="@+id/cloth_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Outwear"
+            android:text="Dress Name"
             app:layout_constraintHorizontal_bias=".1"
             app:layout_constraintVertical_bias=".15"
             android:textColor="@color/black"
@@ -51,7 +51,7 @@
             android:id="@+id/cloth_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sweater"
+            android:text="Category"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintVertical_bias="0"
             android:textColor="@color/black"
@@ -61,6 +61,166 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/cloth_name"
             app:layout_constraintTop_toBottomOf="@id/cloth_name"
+            />
+
+        <TextView
+            android:id="@+id/cloth_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_category"
+            app:layout_constraintTop_toBottomOf="@id/cloth_category"
+            />
+
+        <TextView
+            android:id="@+id/cloth_sleevelength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sleevelenth"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_weather"
+            app:layout_constraintTop_toBottomOf="@id/cloth_weather"
+            />
+
+        <TextView
+            android:id="@+id/cloth_neckline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neckline"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_sleevelength"
+            app:layout_constraintTop_toBottomOf="@id/cloth_sleevelength"
+            />
+
+        <TextView
+            android:id="@+id/cloth_pattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pattern"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_neckline"
+            app:layout_constraintTop_toBottomOf="@id/cloth_neckline"
+            />
+
+        <TextView
+            android:id="@+id/cloth_skin_exposure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skin Exposure"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_pattern"
+            app:layout_constraintTop_toBottomOf="@id/cloth_pattern"
+            />
+
+        <TextView
+            android:id="@+id/cloth_collar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Collar"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_skin_exposure"
+            app:layout_constraintTop_toBottomOf="@id/cloth_skin_exposure"
+            />
+
+        <TextView
+            android:id="@+id/cloth_scarf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scarf"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_collar"
+            app:layout_constraintTop_toBottomOf="@id/cloth_collar"
+            />
+
+        <TextView
+            android:id="@+id/cloth_necktie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Necktie"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_scarf"
+            app:layout_constraintTop_toBottomOf="@id/cloth_scarf"
+            />
+
+        <TextView
+            android:id="@+id/cloth_placket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Placket"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_necktie"
+            app:layout_constraintTop_toBottomOf="@id/cloth_necktie"
+            />
+
+        <TextView
+            android:id="@+id/cloth_colour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Colour"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cloth_placket"
+            app:layout_constraintTop_toBottomOf="@id/cloth_placket"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

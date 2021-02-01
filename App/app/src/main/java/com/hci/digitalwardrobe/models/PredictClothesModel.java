@@ -1,13 +1,15 @@
 package com.hci.digitalwardrobe.models;
 
-import android.graphics.Bitmap;
-import android.media.Image;
+import java.io.Serializable;
 
-import java.io.File;
+public class PredictClothesModel implements Serializable {
 
-public class PredictClothesModel {
-
-    public File clothImage;
+    public String Name;
+    public String User;
+    public String Weather;
+    public String Min_temp;
+    public String Max_temp;
+    public String Image;
     public String Category;
     public String Sleevelength;
     public String Neckline;
@@ -20,12 +22,52 @@ public class PredictClothesModel {
     public String Placket;
     public String Colour;
 
-    public File getClothImage() {
-        return clothImage;
+    public String getName() {
+        return Name;
     }
 
-    public void setClothImage(File clothImage) {
-        this.clothImage = clothImage;
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getUser() {
+        return User;
+    }
+
+    public void setUser(String user) {
+        User = user;
+    }
+
+    public String getWeather() {
+        return Weather;
+    }
+
+    public void setWeather(String weather) {
+        Weather = weather;
+    }
+
+    public String getMin_temp() {
+        return Min_temp;
+    }
+
+    public void setMin_temp(String min_temp) {
+        Min_temp = min_temp;
+    }
+
+    public String getMax_temp() {
+        return Max_temp;
+    }
+
+    public void setMax_temp(String max_temp) {
+        Max_temp = max_temp;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        this.Image = Image;
     }
 
     public String getCategory() {

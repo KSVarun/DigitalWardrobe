@@ -10,9 +10,19 @@ import android.os.Handler;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.hci.digitalwardrobe.calls.GetAllClothes;
+import com.hci.digitalwardrobe.calls.UserApi;
+import com.hci.digitalwardrobe.models.CreateUserModel;
+import com.hci.digitalwardrobe.models.PredictClothesModel;
+import com.hci.digitalwardrobe.models.WardrobeFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyWardrobeActivity extends AppCompatActivity {
 
@@ -27,7 +37,26 @@ public class MyWardrobeActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        items.add(new IndividualClothDetails("Print Something", "Casual"));
+//        items.add(new IndividualClothDetails("Print Something", "Casual"));
+
+
+        GetAllClothes api = WardrobeFactory.getInstance().getRetrofit().create(GetAllClothes.class);
+
+        Call<PredictClothesModel> call = api.getAllClothes(WardrobeFactory.getInstance().getUsername());
+        call.enqueue(new Callback<PredictClothesModel>() {
+            @Override
+            public void onResponse(Call<PredictClothesModel> call, Response<PredictClothesModel> response) {
+                if (response.code() == 200) {
+                    PredictClothesModel list = response.body();
+                    System.out.println();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PredictClothesModel> call, Throwable t) {
+
+            }
+        });
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,6 +93,5 @@ public class MyWardrobeActivity extends AppCompatActivity {
                     Toast.makeText(MyWardrobeActivity.this, "Data Completed", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 }

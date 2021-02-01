@@ -121,7 +121,6 @@ def calc_travel_items(request):
     #return HttpResponse(qs_json, content_type='application/json')
     return JsonResponse(list(cloth.values()), safe=False)
 
-
 @api_view(['POST'])
 def create_user(request):
     print(request.data)
@@ -176,8 +175,17 @@ def add_clothes(request):
     data["User"] = User.objects.get(username=data["User"])
     cloth = Clothes(**data)
     cloth.save()
-    return HttpResponse(cloth)
+    del data["User"]
+    return JsonResponse(request.data)
 
+
+@api_view(['POST'])
+def get_all_clothes(request):
+    data = request.data
+    print(type(data))
+    user = User.objects.get(username=data["User"])
+    user_clothes = Clothes.objects.filter(User=user)
+    return JsonResponse(list(user_clothes.values()), safe=False)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
