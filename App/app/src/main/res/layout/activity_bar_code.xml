@@ -13,7 +13,7 @@
         android:id="@+id/barcodetextview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Barcode:" />
 
     <Button
         android:id="@+id/buttonscan"

@@ -39,12 +39,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:src="@drawable/scanner"
-            android:background="@color/white" />
+            android:background="@color/white"
+            android:onClick="barcodeView"/>
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="33dp" />
 
     </LinearLayout>
 

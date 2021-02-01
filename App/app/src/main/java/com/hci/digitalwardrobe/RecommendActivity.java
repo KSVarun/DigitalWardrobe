@@ -180,7 +180,7 @@ public class RecommendActivity extends AppCompatActivity {
         }
         UploadClothesAPI api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesAPI.class);
 
-        map.put("User", "test123");
+        map.put("User", WardrobeFactory.getInstance().getUsername());
 
 
         Call<List<ClothesModel>> call = api.getActivityClothes(map);
@@ -193,8 +193,8 @@ public class RecommendActivity extends AppCompatActivity {
                     int size = clothes.size();
                     String stringsize = Integer.toString(size);
                     ArrayList<Clothes_temp> clothlist = new ArrayList<>();
-                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket, Suit;
-                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = Suit = false;
+                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket, Suit, Dress, Tanktop;
+                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = Suit = Dress = Tanktop = false;
 
                     for(ClothesModel c: clothes){
                         Log.d("Category:____________", c.getCategory());
@@ -228,9 +228,17 @@ public class RecommendActivity extends AppCompatActivity {
                             clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
                             Rainjacket = true;
                         }
-                        else if(category.equals("Suit")&& Suit ==false){
+                        else if(category.equals("Suit")&& Suit ==false && Dress == false){
                             clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
                             Suit = true;
+                        }
+                        else if(category.equals("Dress")&& Dress ==false && Suit ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Dress = true;
+                        }
+                        else if(category.equals("Tank Top")&& Tanktop ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            Tanktop = true;
                         }
                     }
                     Intent intent = new Intent(getApplicationContext(), FinalActivity.class);

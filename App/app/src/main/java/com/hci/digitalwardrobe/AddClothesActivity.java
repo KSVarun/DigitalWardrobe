@@ -56,6 +56,11 @@ public class AddClothesActivity extends AppCompatActivity {
         startActivityForResult(intent, 1213);
     }
 
+    public void barcodeView(View view){
+        Intent intent = new Intent(this, BarCodeActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

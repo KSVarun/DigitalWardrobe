@@ -35,28 +35,52 @@ def testAPISet(request):
 
     data = request.data
     user = User.objects.get(username=data["User"])
+    gender = user.email
 
-    if activity == "UNIVERSITY":
-        if condition == "RAIN" or condition == "SNOW":
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Rain Jacket", "Coat"])
-        else:
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Jacket", "Coat"])
-    elif activity == "SPORTS_OUTDOOR":
-        if condition == "RAIN" or condition == "SNOW":
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Rain Jacket"])
-        else:
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Jacket"])
-    elif activity == "WORK":
-        if condition == "RAIN" or condition == "SNOW":
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Rain Jacket", "Coat"])
-        else:
-            cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Jacket", "Coat"])
+    if gender== "Male":
+        if activity == "UNIVERSITY":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Rain Jacket", "Coat"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Sweater", "Jacket", "Coat"])
+        elif activity == "SPORTS_OUTDOOR":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Rain Jacket"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Jacket"])
+        elif activity == "WORK":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Rain Jacket", "Coat"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Jacket", "Coat"])
+    else:
+        if activity == "UNIVERSITY":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Dress", "Sweater", "Rain Jacket", "Coat"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Dress", "Tank Top",  "Sweater", "Jacket", "Coat"])
+        elif activity == "SPORTS_OUTDOOR":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "T-shirt","Tank Top" "Sweater", "Rain Jacket"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "T-shirt", "Tank Top", "Sweater", "Jacket"])
+        elif activity == "WORK":
+            if condition == "RAIN" or condition == "SNOW":
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Suit", "Rain Jacket", "Coat"])
+            else:
+                cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
+                    User=user).filter(Category__in=["Trousers", "Shirt", "Dress", "Jacket", "Coat"])
 
     #qs_json = serializers.serialize('json', cloth)
     #return HttpResponse(qs_json, content_type='application/json')
@@ -74,12 +98,23 @@ def calc_travel_items(request):
 
     data = request.data
     user = User.objects.get(username=data["User"])
-    if pop < 0.3:
-        cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
-            Category__in=["Trousers", "Shirt", "T-shirt", "Sweater", "Jacket", "Coat"])
+    gender = user.email
+    print(gender)
+
+    if gender == "Male":
+        if pop < 0.3:
+            cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+                Category__in=["Trousers", "Shirt", "T-shirt", "Sweater", "Jacket", "Coat"])
+        else:
+            cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+                Category__in=["Trousers", "Shirt", "T-shirt", "Sweatshirts", "Rain Jacket", "Coat"])
     else:
-        cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
-            Category__in=["Trousers", "Shirt", "T-shirt", "Sweatshirts", "Rain Jacket", "Coat"])
+        if pop < 0.3:
+            cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+                Category__in=["Trousers", "T-shirt", "Dress", "Sweater", "Jacket", "Coat"])
+        else:
+            cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
+                Category__in=["Trousers", "Tank Top", "Sweatshirts", "Rain Jacket", "Coat"])
 
     #qs_json = serializers.serialize('json', cloth)
     #print(qs_json)
@@ -94,7 +129,7 @@ def create_user(request):
     try:
 
         user = User.objects.create_user(request.data.get("userName"), "", request.data.get("password"))
-        user.gender = request.data.get("gender")
+        user.email = request.data.get("gender")
         user.first_name = request.data.get("firstName")
         user.last_name = request.data.get("lastName")
         user.save()
