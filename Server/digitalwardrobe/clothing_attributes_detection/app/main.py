@@ -42,6 +42,6 @@ def test(image):
     for category, prediction in df.iterrows():
         predicted_data[category] = prediction["Confidence"]
 
-    predicted_data["Cloth Image"] = image
+    predicted_data["Image"] = image
 
     return predicted_data
