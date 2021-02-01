@@ -34,13 +34,13 @@
 
 
         <ImageButton
+            android:id="@+id/imgbtn"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
             android:src="@drawable/scanner"
-            android:background="@color/white"
-            android:onClick="barcodeView"/>
+            android:background="@color/white"/>
 
         <ProgressBar
             android:paddingTop="30dp"

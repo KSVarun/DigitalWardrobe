@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import retrofit2.Response;
 public class AddClothesActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
+    ImageButton imgbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,16 @@ public class AddClothesActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         progressBar = findViewById(R.id.loading_spinner);
+
+        imgbtn = findViewById(R.id.imgbtn);
+
+        imgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BarCodeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void openOptions(View view) {
