@@ -48,10 +48,10 @@ def testAPISet(request):
         elif activity == "SPORTS_OUTDOOR":
             if condition == "RAIN" or condition == "SNOW":
                 cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                    User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Rain Jacket"])
+                    User=user).filter(Category__in=["Sport Pants", "Sport Shirt", "Sweater", "Rain Jacket"])
             else:
                 cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
-                    User=user).filter(Category__in=["Trousers", "T-shirt", "Sweater", "Jacket"])
+                    User=user).filter(Category__in=["Sport Pants", "Sport Shirt", "Sweater", "Jacket"])
         elif activity == "WORK":
             if condition == "RAIN" or condition == "SNOW":
                 cloth = Clothes.objects.filter(Max_temp__gt=temperature).filter(Min_temp__lte=temperature).filter(
@@ -107,14 +107,14 @@ def calc_travel_items(request):
                 Category__in=["Trousers", "Shirt", "T-shirt", "Sweater", "Jacket", "Coat"])
         else:
             cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
-                Category__in=["Trousers", "Shirt", "T-shirt", "Sweatshirts", "Rain Jacket", "Coat"])
+                Category__in=["Trousers", "Shirt", "T-shirt", "Sweater", "Rain Jacket", "Coat"])
     else:
         if pop < 0.3:
             cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
                 Category__in=["Trousers", "T-shirt", "Dress", "Sweater", "Jacket", "Coat"])
         else:
             cloth = Clothes.objects.filter(Max_temp__gt=temp).filter(Min_temp__lte=temp).filter(User=user).filter(
-                Category__in=["Trousers", "Tank Top", "Sweatshirts", "Rain Jacket", "Coat"])
+                Category__in=["Trousers", "Tank Top", "Sweater", "Rain Jacket", "Coat"])
 
     #qs_json = serializers.serialize('json', cloth)
     #print(qs_json)

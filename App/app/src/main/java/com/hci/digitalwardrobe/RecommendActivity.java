@@ -193,52 +193,60 @@ public class RecommendActivity extends AppCompatActivity {
                     int size = clothes.size();
                     String stringsize = Integer.toString(size);
                     ArrayList<Clothes_temp> clothlist = new ArrayList<>();
-                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket, Suit, Dress, Tanktop;
-                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = Suit = Dress = Tanktop = false;
+                    boolean trousers, Shirt,  Tshirt, Sweater, Jacket, Coat, Rainjacket, Suit, Dress, Tanktop, Sportshirt, Sportpants;
+                    trousers = Shirt =  Tshirt = Sweater = Jacket = Coat = Rainjacket = Suit = Dress = Tanktop = Sportpants = Sportshirt = false;
 
                     for(ClothesModel c: clothes){
                         Log.d("Category:____________", c.getCategory());
                         String category = c.getCategory();
                         String sleevelength = c.getSleevelength();
                         if(category.equals("Trousers") && trousers == false) {
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             trousers = true;
                         }
                         else if(category.equals("Shirt")&& Shirt ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Shirt = true;
                         }
                         else if(category.equals("T-shirt")&& Tshirt ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Tshirt = true;
                         }
                         else if(category.equals("Sweater")&& Sweater ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Sweater = true;
                         }
                         else if(category.equals("Jacket")&& Jacket ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Jacket = true;
                         }
                         else if(category.equals("Coat")&& Coat ==false && Rainjacket == false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Coat = true;
                         }
                         else if(category.equals("Rain Jacket")&& Rainjacket ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Rainjacket = true;
                         }
                         else if(category.equals("Suit")&& Suit ==false && Dress == false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Suit = true;
                         }
                         else if(category.equals("Dress")&& Dress ==false && Suit ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Dress = true;
                         }
                         else if(category.equals("Tank Top")&& Tanktop ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Tanktop = true;
+                        }
+                        else if(category.equals("Sport Shirt")&& Sportshirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
+                            Sportshirt = true;
+                        }
+                        else if(category.equals("Sport Pants")&& Sportpants ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
+                            Sportpants = true;
                         }
                     }
                     Intent intent = new Intent(getApplicationContext(), FinalActivity.class);

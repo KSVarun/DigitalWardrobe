@@ -17,6 +17,7 @@ import com.hci.digitalwardrobe.Classes.Weather;
 import com.hci.digitalwardrobe.calls.UploadClothesAPI;
 import com.hci.digitalwardrobe.models.ClothesModel;
 import com.hci.digitalwardrobe.models.WardrobeFactory;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -205,40 +206,41 @@ public class TravelRecommendation extends AppCompatActivity {
                         Log.d("Category:____________", c.getCategory());
                         String category = c.getCategory();
                         String sleevelength = c.getSleevelength();
-                        if(category.equals("Trousers") && trousers == false) {
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                        String imgpath = c.getImage();
+                        if(category.equals("Dress")&& Dress ==false && trousers == false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
+                            Dress = true;
+                        }
+                        else if(category.equals("Trousers") && trousers == false && Dress ==false) {
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             trousers = true;
                         }
-                        else if(category.equals("Shirt")&& Shirt ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                        else if(category.equals("Shirt")&& Shirt ==false && Tshirt==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Shirt = true;
                         }
-                        else if(category.equals("T-shirt")&& Tshirt ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                        else if(category.equals("T-shirt")&& Tshirt ==false&& Shirt ==false){
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Tshirt = true;
                         }
                         else if(category.equals("Sweater")&& Sweater ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Sweater = true;
                         }
                         else if(category.equals("Jacket")&& Jacket ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Jacket = true;
                         }
                         else if(category.equals("Coat")&& Coat ==false&& Rainjacket == false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Coat = true;
                         }
                         else if(category.equals("Rain Jacket")&& Rainjacket ==false && Coat==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             Rainjacket = true;
                         }
-                        else if(category.equals("Dress")&& Dress ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
-                            Dress = true;
-                        }
                         else if(category.equals("Tank Top")&& TankTop ==false){
-                            clothlist.add(new Clothes_temp(sleevelength,category, R.drawable.background));
+                            clothlist.add(new Clothes_temp(sleevelength,category, c.getImage()));
                             TankTop = true;
                         }
                     }

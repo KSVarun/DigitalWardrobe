@@ -1,11 +1,9 @@
 package com.hci.digitalwardrobe.Classes;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,8 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.hci.digitalwardrobe.Classes.Clothes_temp;
 import com.hci.digitalwardrobe.R;
+import com.hci.digitalwardrobe.models.WardrobeFactory;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,7 +39,9 @@ public class CustomAdapter extends ArrayAdapter<Clothes_temp> {
         TextView desc = (TextView) customView.findViewById(R.id.Description);
         desc.setText(this.items.get(position).getDescription());
         ImageView img = (ImageView) customView.findViewById(R.id.image1);
-        img.setImageResource(this.items.get(position).getImage_resource_id());
+
+        Picasso.get().load(WardrobeFactory.getInstance().getAppContext().getString
+                ((R.string.MEDIA_SERVER_URL)) + this.items.get(position).getImageURL()).into(img);
 
         return customView;
     }
