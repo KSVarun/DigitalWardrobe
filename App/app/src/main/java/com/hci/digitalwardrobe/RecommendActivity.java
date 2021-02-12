@@ -93,13 +93,7 @@ public class RecommendActivity extends AppCompatActivity {
             setActivity(spinner_text);
             Log.i("condition", condition.toString());
             String cloth = ":)";
-            ArrayList<Clothes_temp> list = PredictCloth(activity,temperatureInt,condition);
-
-            Intent intent = new Intent(getApplicationContext(), FinalActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("List", list);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            PredictCloth(activity,temperatureInt,condition);
 
             String resultText = "Main : "+ main +
                     "\nTemperature : " + temperature +
@@ -115,69 +109,11 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     //Function that calculates one clothing item based of activity, temperature and weather condition.
-    public ArrayList<Clothes_temp> PredictCloth(Activities activity, float temperature, TravelRecommendation.Condition condition){
+    public void PredictCloth(Activities activity, float temperature, TravelRecommendation.Condition condition){
         Map<String,String> map= new HashMap<>();
-        String clothitem;
         map.put("Condition", condition.toString());
         map.put("Activity", activity.toString());
         map.put("Temperature", Float.toString(temperature));
-        switch (activity){
-            case SPORTS_OUTDOOR:
-                map.put("Activity", activity.toString());
-                switch(condition) {
-                    case RAIN:
-                    case SNOW:
-                        map.put("Condition", condition.toString());
-                        if (temperature < 0) clothitem = "Winter jacket";
-                        else if (temperature > 0 && temperature < 10) clothitem = "Rain jacket";
-                        else if (temperature > 10 && temperature < 18) clothitem = "Rain jacket";
-                        else if (temperature > 18 && temperature < 22) clothitem = "Sport shirt";
-                        else clothitem = "Sport shirt";
-                        break;
-                    case CLEAR:
-                    case CLOUDS:
-                        map.put("Condition", condition.toString());
-                        if (temperature < 0) clothitem = "Winter jacket";
-                        else if (temperature > 0 && temperature < 10) clothitem = "Jacket";
-                        else if (temperature > 10 && temperature < 18) clothitem = "Long sleeve sport shirt";
-                        else if (temperature > 18 && temperature < 22) clothitem = "Sport shirt";
-                        else clothitem = "Sport shirt";
-                        break;
-                    default:
-                        clothitem = "t-shirt";
-                }
-            break;
-            case WORK:
-                map.put("Activity", activity.toString());
-                if(gender=="male"){
-                    if(temperature<22) clothitem = "Suit";
-                    else clothitem = "Shirt";
-                }
-                if(gender=="female"){
-                    if(temperature<22) clothitem = "Blazer";
-                    else clothitem = "Shirt";
-                }
-            break;
-            case UNIVERSITY:
-                map.put("Activity", activity.toString());
-                if(gender=="male"){
-                    if (temperature < 0) clothitem = "Sweatshirt";
-                    else if (temperature > 0 && temperature < 10) clothitem = "Sweatshirt";
-                    else if (temperature > 10 && temperature < 18) clothitem = "Long sleeve shirt";
-                    else if (temperature > 18 && temperature < 22) clothitem = "shirt";
-                    else clothitem = "shirt";
-                }
-                if(gender=="female"){
-                    if (temperature < 0) clothitem = "Sweatshirt";
-                    else if (temperature > 0 && temperature < 10) clothitem = "Sweatshirt";
-                    else if (temperature > 10 && temperature < 18) clothitem = "Blouse";
-                    else if (temperature > 18 && temperature < 22) clothitem = "Top";
-                    else clothitem = "Top";
-                }
-            break;
-            default:
-                clothitem = "t-shirt";
-        }
         UploadClothesAPI api = WardrobeFactory.getInstance().getRetrofit().create(UploadClothesAPI.class);
 
         map.put("User", WardrobeFactory.getInstance().getUsername());
@@ -270,8 +206,6 @@ public class RecommendActivity extends AppCompatActivity {
             }
 
         });
-        ArrayList<Clothes_temp> clothlist1 = new ArrayList<>();
-        return clothlist1;
     }
 
     // Function to set the Weather condition based on API data.

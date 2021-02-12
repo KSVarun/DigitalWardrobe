@@ -126,19 +126,13 @@ public class TravelRecommendation extends AppCompatActivity {
             float temperatureInt = Float.parseFloat(temperature);
             temperatureInt -= 273.15;
              */
+
             temperature = temperature / array.length();
             pop = pop / array.length();
+            predictCloth(temperature, pop);
             String sstemperature = Float.toString(temperature);
             String spop = Float.toString(pop);
 
-            String cloth = predictCloth(temperature,pop);
-
-            String resultText = "Main : "+ main +
-                    "\npop : " + spop +
-                    "\nTemperature : " + sstemperature +
-                    "\nWe recommend  : " + cloth;
-
-            result.setText(resultText);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,43 +141,12 @@ public class TravelRecommendation extends AppCompatActivity {
 
     }
 
-    public String predictCloth(float temp, float pop){
+    public void predictCloth(float temp, float pop){
         String Temperature = Float.toString(temp);
         String POP = Float.toString(pop);
-        String clothingitem = "";
         Map<String,String> map= new HashMap<>();
         map.put("Temperature", Temperature);
         map.put("POP", POP);
-        if(temp<0){
-            map.put("Temperature", Temperature);
-            map.put("POP", POP);
-            if(pop< POP_THRESHOLD) clothingitem = "Winter coat";
-            else clothingitem = "Winter jacket";
-        }
-        else if(0<=temp && temp<10){
-            map.put("Temperature", Temperature);
-            map.put("POP", POP);
-            if(pop< POP_THRESHOLD) clothingitem = "down jacket";
-            else clothingitem = "Rain coat";
-        }
-        else if(10<=temp && temp<18){
-            map.put("Temperature", Temperature);
-            map.put("POP", POP);
-            if(pop< POP_THRESHOLD) clothingitem = "Jacket";
-            else clothingitem = "Rain jacket";
-        }
-        else if(18<=temp && temp<22){
-            map.put("Temperature", Temperature);
-            map.put("POP", POP);
-            if(pop< POP_THRESHOLD) clothingitem = "Shirt";
-            else clothingitem = "Windbreaker";
-        }
-        else{
-            map.put("Temperature", Temperature);
-            map.put("POP", POP);
-            if(pop< POP_THRESHOLD) clothingitem = "T-Shirt";
-            else clothingitem = "Windbreaker";
-        }
 
         map.put("User", WardrobeFactory.getInstance().getUsername());
 
@@ -265,7 +228,6 @@ public class TravelRecommendation extends AppCompatActivity {
             }
         });
 
-        return clothingitem;
     }
 
 
